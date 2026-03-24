@@ -1,37 +1,55 @@
 # Claude Skills
 
-A collection of custom [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills for extending Claude's capabilities with specialized workflows.
+A collection of custom [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills for extending Claude's capabilities with specialized workflows focused on UI/UX design, product development, and content creation.
 
 ## Available Skills
 
+### Design & UI
+
 | Skill | Description |
 |-------|-------------|
-| [video-decompose](video-decompose/) | Convert screen recordings (Loom, mp4) into structured keyframes + aligned transcript. Extracts unique frames via SSIM-based deduplication, supports URL download via yt-dlp, and outputs markdown + images ready to feed into Claude conversations. |
+| [interface-grader](interface-grader/) | Grade any frontend interface with a two-layer scoring system. Layer 1 establishes the site's goal and context. Layer 2 grades craft quality through that lens, with site-wide and per-page criteria using binary pass/fail with evidence. |
+| [ui-autoimprove](ui-autoimprove/) | Iteratively improve frontend UI quality through automated grade-fix-verify cycles inspired by Karpathy's autoresearch pattern. Grades the interface, identifies the weakest area, applies targeted fixes, and re-grades. |
+| [dashboard](dashboard/) | Design modern, actionable dashboards through collaborative workflow. Covers requirements, strategy, visual design, and validation phases with user checkpoints. |
+| [product-design-craft](product-design-craft/) | Create production-grade UI with the craft level of Linear, Stripe, Superhuman, Figma, Notion, and Slack. Covers design systems, component customization, interaction design, and micro-animations. |
+| [product-ui](product-ui/) | Build production-grade product interfaces with physics-based animation, state handling, and systematic design tokens. The invisible craft that makes professional software feel polished. |
+| [ux-patterns](ux-patterns/) | Design intuitive, frictionless user experiences. Covers page structure, information architecture, navigation patterns, content hierarchy, and user flows. |
+| [interaction-design](interaction-design/) | Design and implement microinteractions, motion design, transitions, and user feedback patterns for polished UI experiences. |
+
+### Productivity & Content
+
+| Skill | Description |
+|-------|-------------|
+| [video-decompose](video-decompose/) | Convert screen recordings (Loom, mp4) into structured keyframes + aligned transcript for LLM consumption. SSIM-based frame deduplication with JSON output for agent integration. |
+| [harvest-feed](harvest-feed/) | Mine conversations for publishable feed entries for a digital garden. Extracts non-obvious tricks, useful discoveries, tooling insights, and project progress into content-ready posts. |
+| [lenny-research](lenny-research/) | Research Lenny Rachitsky's archive of 349 newsletter posts and 289 podcast interviews for practical advice on startups, product management, growth, and leadership. |
 
 ## Installation
 
 ### Quick Install (Recommended)
 
 1. Clone this repo:
+
    ```bash
    git clone https://github.com/mnttnm/claude-skills.git
    ```
 
-2. Copy the skill you want into your Claude skills directory:
+2. Copy the skill(s) you want into your Claude skills directory:
+
    ```bash
-   cp -r claude-skills/video-decompose ~/.claude/skills/video-decompose
+   cp -r claude-skills/<skill-name> ~/.claude/skills/<skill-name>
    ```
 
 3. Restart Claude Code. The skill will be detected automatically.
 
 ### Install from `.skill` Package
 
-Each skill also has a pre-packaged `.skill` file in the [`dist/`](dist/) folder:
+Each skill has a pre-packaged `.skill` file in the [`dist/`](dist/) folder:
 
 ```bash
-# Download and install
-curl -LO https://raw.githubusercontent.com/mnttnm/claude-skills/main/dist/video-decompose.skill
-claude install-skill video-decompose.skill
+# Download and install a single skill
+curl -LO https://raw.githubusercontent.com/mnttnm/claude-skills/main/dist/<skill-name>.skill
+claude install-skill <skill-name>.skill
 ```
 
 ### Install All Skills
@@ -45,34 +63,27 @@ done
 
 ### Verify Installation
 
-After installing, verify the skill appears in Claude Code:
-
-```bash
-# Start a Claude Code session and check the skill list
-# The skill should appear in the available skills
-# You can also invoke it directly:
-# /video-decompose
-```
+After installing, the skill should appear in Claude Code's skill list. You can also invoke any skill directly with `/<skill-name>`.
 
 ### Skill Dependencies
 
-Some skills require external tools. Check each skill's SKILL.md for prerequisites:
+Most skills are self-contained (no external dependencies). Exceptions:
 
 | Skill | Dependencies |
 |-------|-------------|
-| video-decompose | Python 3.10+, `opencv-python`, `scikit-image`, `numpy` (required), `yt-dlp` (optional, for URL downloads) |
+| video-decompose | Python 3.10+, `opencv-python`, `scikit-image`, `numpy`. Optional: `yt-dlp` for URL downloads. |
+| lenny-research | Lenny's Data MCP server for content access. |
 
-Install video-decompose dependencies:
 ```bash
+# video-decompose dependencies
 pip install opencv-python scikit-image numpy
-brew install yt-dlp  # optional, for downloading from Loom/YouTube URLs
+brew install yt-dlp  # optional
 ```
 
 ### Uninstall
 
-Remove the skill folder from your Claude skills directory:
 ```bash
-rm -rf ~/.claude/skills/video-decompose
+rm -rf ~/.claude/skills/<skill-name>
 ```
 
 ## Skill Structure
@@ -87,7 +98,7 @@ skill-name/
 └── assets/               # Templates, images, or files used in output
 ```
 
-- **SKILL.md** is the only required file. It contains YAML frontmatter (`name` + `description`) that tells Claude when to activate the skill, and markdown instructions for how to use it.
+- **SKILL.md** is the only required file. It contains YAML frontmatter (`name` + `description`) that tells Claude when to activate the skill, and markdown body with instructions.
 - Skills activate automatically based on conversation context, or can be invoked explicitly with `/<skill-name>`.
 
 ## Contributing
@@ -95,10 +106,9 @@ skill-name/
 To add a new skill:
 
 1. Create a directory at the repo root with `SKILL.md` and optional `scripts/`, `references/`, `assets/`
-2. Package it: `python3 scripts/package_skill.py <skill-dir> dist/`
+2. Package it using the skill-creator's `package_skill.py` into `dist/`
 3. Add both the source directory and `.skill` package to the repo
 4. Update the skills table in this README
-5. Document any dependencies in the dependencies table
 
 ## Author
 
