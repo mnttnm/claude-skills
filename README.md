@@ -1,6 +1,6 @@
 # Claude Skills
 
-A collection of custom [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills for extending Claude's capabilities with specialized workflows focused on UI/UX design, product development, and content creation.
+A collection of custom [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills for designers and developers — covering UI/UX craft, productivity workflows, and editor tooling.
 
 ## Available Skills
 
@@ -23,6 +23,12 @@ A collection of custom [Claude Code](https://docs.anthropic.com/en/docs/claude-c
 | [video-decompose](video-decompose/) | Convert screen recordings (Loom, mp4) into structured keyframes + aligned transcript for LLM consumption. SSIM-based frame deduplication with JSON output for agent integration. |
 | [harvest-feed](harvest-feed/) | Mine conversations for publishable feed entries for a digital garden. Extracts non-obvious tricks, useful discoveries, tooling insights, and project progress into content-ready posts. |
 | [lenny-research](lenny-research/) | Research Lenny Rachitsky's archive of 349 newsletter posts and 289 podcast interviews for practical advice on startups, product management, growth, and leadership. |
+
+### Claude Code Tooling
+
+| Skill | Description |
+|-------|-------------|
+| [claude-statusline-setup](claude-statusline-setup/) | Install a customized Claude Code statusline. Interactively asks which components to include (working directory, git branch, model, context bar, 5h/weekly rate-limit %, RTK token savings, Shopify dev server, vim mode) and emits a tailored `~/.claude/statusline-command.sh` plus the `settings.json` wiring. |
 
 ## Installation
 
