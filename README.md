@@ -20,6 +20,7 @@ A collection of custom [Claude Code](https://docs.anthropic.com/en/docs/claude-c
 
 | Skill | Description |
 |-------|-------------|
+| [client-demo-video](client-demo-video/) | Make a narrated screen-recording demo video of a running web app from a plain description of what to show, for client project updates. Plain, factual presenter script (not marketing copy), a natural-sounding ElevenLabs voice chosen by audition, a bundled Playwright recorder, and a written list of open questions delivered with the video. |
 | [video-decompose](video-decompose/) | Convert screen recordings (Loom, mp4) into structured keyframes + aligned transcript for LLM consumption. SSIM-based frame deduplication with JSON output for agent integration. |
 | [harvest-feed](harvest-feed/) | Mine conversations for publishable feed entries for a digital garden. Extracts non-obvious tricks, useful discoveries, tooling insights, and project progress into content-ready posts. |
 | [lenny-research](lenny-research/) | Research Lenny Rachitsky's archive of 349 newsletter posts and 289 podcast interviews for practical advice on startups, product management, growth, and leadership. |

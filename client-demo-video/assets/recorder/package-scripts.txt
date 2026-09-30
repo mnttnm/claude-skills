@@ -1,0 +1,7 @@
+Add to package.json "scripts":
+  "demo:video": "tsx demo-video/run.ts"
+Add to demo-video/.gitignore:
+  out/
+  .cache/
+Dev dependencies the recorder needs (most projects already have them):
+  @playwright/test  tsx  dotenv
